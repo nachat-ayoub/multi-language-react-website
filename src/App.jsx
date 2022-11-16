@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { site_data } from "./utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // ? Components :
 import { Navbar, Footer } from "./components";
@@ -22,7 +22,11 @@ const Layout = ({ children, lang, setLang }) => {
 };
 
 const App = () => {
-  const [lang, setLang] = useState("en");
+  const [lang, setLang] = useState(localStorage.getItem("lang") ?? "en");
+
+  useEffect(() => {
+    localStorage.setItem("lang", lang);
+  }, [lang]);
 
   return (
     <Router>
